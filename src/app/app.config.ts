@@ -1,8 +1,13 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
+import { ApplicationConfig } from '@angular/core';
+import { OrderFormComponent } from './order-form/order-form.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    provideRouter([
+      { path: '', component: OrderFormComponent },
+      { path: 'order-list', component: OrderListComponent },
+    ]),
+  ],
 };

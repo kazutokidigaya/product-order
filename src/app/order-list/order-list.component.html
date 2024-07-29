@@ -1,0 +1,7 @@
+<div *ngIf="order.length">
+  <h2>Order List</h2>
+  <ul>
+    <li *ngFor="let item of order">{{ item.product }}: {{ item.quantity }}</li>
+  </ul>
+  <button (click)="readOrder()">What is my Order?</button>
+</div>

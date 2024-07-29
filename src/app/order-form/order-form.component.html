@@ -1,0 +1,46 @@
+<div>
+  <div class="add-product">
+    <input [(ngModel)]="newProduct" placeholder="Add new product" />
+    <button (click)="addCustomProduct()">Add Product</button>
+  </div>
+
+  <div *ngIf="customProducts.length > 0" class="custom-products">
+    <h3>Custom Products</h3>
+    <ul>
+      <li *ngFor="let product of customProducts">
+        {{ product }}
+        <button (click)="deleteCustomProduct(product)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  <table>
+    <tr *ngFor="let row of orderRows; let i = index">
+      <td>
+        <select
+          [(ngModel)]="row.product"
+          [disabled]="getAvailableProducts(i).length === 0"
+        >
+          <option value="">Choose Product</option>
+          <option
+            *ngFor="let product of getAvailableProducts(i)"
+            [value]="product"
+          >
+            {{ product }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="row.quantity" [disabled]="!row.product">
+          <option value="">Choose Quantity</option>
+          <option *ngFor="let n of [0, 1, 2, 3, 4, 5]" [value]="n">
+            {{ n }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <button (click)="addRow(i)" [disabled]="!canAddRow(i)">ADD</button>
+      </td>
+    </tr>
+  </table>
+  <button type="button" (click)="showOrder()">Show Order</button>
+</div>
